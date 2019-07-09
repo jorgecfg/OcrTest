@@ -9,35 +9,40 @@
 import Foundation
 
 class SearchCode {
-    private let dataService = DataService()
-
-    func locateCode(_ textRecognized:String) {
+    var dataService = DataService()
+    
+    func locateCode(_ textRecognized:String, brands:[Brand]) -> Model? {
+        let brands = locateBrand(textRecognized)
+        
         let itens = textRecognized.ocrToArray()
-        for item in itens {
-            if let brands = dataService.brands {
-                if let brand = brands.filter({
-                    ($0.name!.contains(item))
-                }).first {
-                    print("Found Brand: \(brand.name)");
-                    for code in itens {
-                        if let models = dataService.models {
-                            if let model = models.filter({
-                                ($0.code!.contains(code)) && $0.brand == brand
-                            }).first {
-                                print("Found Model Car: \(model.carName)");
-                            }
-                        }
+        for brand in brands {
+            for code in itens {
+                if let models = dataService.models {
+                    if let model = models.filter({
+                        ($0.code!.contains(code)) && $0.brand == brand
+                    }).first {
+                        return model
                     }
-                    
                 }
-                
-                
             }
         }
+        return Model()
     }
+
     
-    func locateBrand(_ textRecognized:String) {
-
-
+    func locateBrand(_ textRecognized:String) -> [Brand] {
+        var brands = [Brand]()
+        
+        let itens = textRecognized.ocrToArray()
+        for item in itens {
+            if let brandsSource = dataService.brands {
+                if let brand = brandsSource.filter({
+                    ($0.name!.contains(item))
+                }).first {
+                    brands.append(brand)
+                }
+            }
+        }
+        return brands
     }
 }

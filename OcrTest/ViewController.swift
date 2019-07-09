@@ -14,7 +14,8 @@ import TOCropViewController
 
 class ViewController: UIViewController {
     @IBOutlet private var imageView: UIImageView!
-    
+    private let dataService = DataService()
+    private let searchCode = SearchCode()
     var myImage = UIImage(named: "schein_4", in: nil, compatibleWith: .none)!
     var preprocessedImage:UIImage?
     
@@ -32,6 +33,7 @@ class ViewController: UIViewController {
     
     func loadData() {
         self.dataService.loadData()
+        self.searchCode.dataService = self.dataService
     }
     
     func openScan() {
