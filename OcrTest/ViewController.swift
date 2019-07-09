@@ -16,7 +16,7 @@ import TOCropViewController
 class ViewController: UIViewController, G8TesseractDelegate {
     @IBOutlet private var imageView: UIImageView!
     
-    var tesseract:G8Tesseract = G8Tesseract.init(language: "deu")!
+    var tesseract:G8Tesseract = G8Tesseract.init(language: "eng")!
     var myImage = UIImage(named: "schein_4", in: nil, compatibleWith: .none)!
     var preprocessedImage:UIImage?
     let dataService = DataService()
