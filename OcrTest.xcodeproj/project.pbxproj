@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		663818CE22D48071003F9AE3 /* ScanSwiftOcr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663818CD22D48071003F9AE3 /* ScanSwiftOcr.swift */; };
+		663818D022D498ED003F9AE3 /* ScanTesseractOcr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663818CF22D498ED003F9AE3 /* ScanTesseractOcr.swift */; };
+		663818D222D4B94B003F9AE3 /* SearchCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663818D122D4B94B003F9AE3 /* SearchCode.swift */; };
 		9355651F22C6055200FB696D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9355651E22C6055200FB696D /* AppDelegate.swift */; };
 		9355652122C6055200FB696D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9355652022C6055200FB696D /* ViewController.swift */; };
 		9355652422C6055200FB696D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9355652222C6055200FB696D /* Main.storyboard */; };
@@ -25,6 +28,9 @@
 
 /* Begin PBXFileReference section */
 		3EA964300A6ACCEA8B43230A /* Pods-OcrTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OcrTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OcrTest/Pods-OcrTest.debug.xcconfig"; sourceTree = "<group>"; };
+		663818CD22D48071003F9AE3 /* ScanSwiftOcr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanSwiftOcr.swift; sourceTree = "<group>"; };
+		663818CF22D498ED003F9AE3 /* ScanTesseractOcr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanTesseractOcr.swift; sourceTree = "<group>"; };
+		663818D122D4B94B003F9AE3 /* SearchCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCode.swift; sourceTree = "<group>"; };
 		9355651B22C6055200FB696D /* OcrTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OcrTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9355651E22C6055200FB696D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9355652022C6055200FB696D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +137,9 @@
 			isa = PBXGroup;
 			children = (
 				93D2423E22CF49D1003A3368 /* String+Extension.swift */,
+				663818CD22D48071003F9AE3 /* ScanSwiftOcr.swift */,
+				663818CF22D498ED003F9AE3 /* ScanTesseractOcr.swift */,
+				663818D122D4B94B003F9AE3 /* SearchCode.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -272,7 +281,10 @@
 				9355652122C6055200FB696D /* ViewController.swift in Sources */,
 				93D2423822CF29B9003A3368 /* DataService.swift in Sources */,
 				93D2423B22CF29FD003A3368 /* Model.swift in Sources */,
+				663818D022D498ED003F9AE3 /* ScanTesseractOcr.swift in Sources */,
 				93D2423622CE4170003A3368 /* IconButton.swift in Sources */,
+				663818CE22D48071003F9AE3 /* ScanSwiftOcr.swift in Sources */,
+				663818D222D4B94B003F9AE3 /* SearchCode.swift in Sources */,
 				9355651F22C6055200FB696D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -426,7 +438,10 @@
 				DEVELOPMENT_TEAM = RU2W7ZP6UW;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = OcrTest/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = de.mvise.OcrTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -443,7 +458,10 @@
 				DEVELOPMENT_TEAM = RU2W7ZP6UW;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = OcrTest/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = de.mvise.OcrTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

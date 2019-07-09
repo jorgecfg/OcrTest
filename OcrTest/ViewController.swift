@@ -7,19 +7,17 @@
 //
 
 import UIKit
-import SwiftOCR
 import TesseractOCR
 import GPUImage
 import YesWeScan
 import TOCropViewController
 
-class ViewController: UIViewController, G8TesseractDelegate {
+class ViewController: UIViewController {
     @IBOutlet private var imageView: UIImageView!
     
-    var tesseract:G8Tesseract = G8Tesseract.init(language: "eng")!
     var myImage = UIImage(named: "schein_4", in: nil, compatibleWith: .none)!
     var preprocessedImage:UIImage?
-    let dataService = DataService()
+    
     
     
     override func viewDidLoad() {
@@ -28,7 +26,7 @@ class ViewController: UIViewController, G8TesseractDelegate {
 
         loadData()
 //        openScan()
-//        localScanTest()
+        localScanTest()
         
     }
     
@@ -49,43 +47,30 @@ class ViewController: UIViewController, G8TesseractDelegate {
     }
     
     func runOcr() {
-        if let textDiscovered = scheinRecognizeTesseract(page: .sparseText) {
-            print(textDiscovered)
-            print("----------------------------------------------")
-            
-            let itens = textDiscovered.ocrToArray()
-            for item in itens {
-                if let brands = self.dataService.brands {
-                    if let brand = brands.filter({
-                        ($0.name!.contains(item))
-                    }).first {
-                        print("Found Brand: \(brand.name)");
-                        for code in itens {
-                            if let models = self.dataService.models {
-                                if let model = models.filter({
-                                    ($0.code!.contains(code)) && $0.brand == brand
-                                }).first {
-                                    print("Found Model Car: \(model.carName)");
-                                }
-                            }
-                        }
-
-                    }
-                    
-
-                }
+        let scanTesseractOcr = ScanTesseractOcr()
+        if let image = self.preprocessedImage {
+            scanTesseractOcr.scheinRecognizeTesseract(image, page: .sparseText) { textRecognized in
+                let searchCode = SearchCode()
+                searchCode.locateCode(textRecognized)
             }
         }
+
     }
     
     func runOcrTest() {
-        scheinRecognizeSwiftOCR()
-        
-        let pages:[G8PageSegmentationMode] = [.auto, .autoOnly, .circleWord, .singleBlock, .singleBlockVertText, .singleChar, .singleColumn, .singleLine, .singleWord, .sparseText]
-        for page in pages {
-            if let textDiscovered = scheinRecognizeTesseract(page: page) {
-                print("Test \(page.rawValue) : \(textDiscovered)")
+        if let imageToScan = self.preprocessedImage {
+            let scanSwiftOcr = ScanSwiftOcr()
+            scanSwiftOcr.scheinRecognizeSwiftOCR(imageToScan) { recognizedString in
+                print(recognizedString)
             }
+            
+            let scanTesseractOcr = ScanTesseractOcr()
+            for page in scanTesseractOcr.pages {
+                scanTesseractOcr.scheinRecognizeTesseract(imageToScan, page: page, callback: { recognizedText in
+                    print("Test \(page.rawValue) : \(recognizedText)")
+                })
+            }
+
         }
 
     }
@@ -97,7 +82,6 @@ class ViewController: UIViewController, G8TesseractDelegate {
             self.preprocessedImage = preprocessedImage.preprocessedImage()
         }
         
-        
         let imageView = view.viewWithTag(1) as! UIImageView
         imageView.image = self.preprocessedImage
 
@@ -106,42 +90,15 @@ class ViewController: UIViewController, G8TesseractDelegate {
 
     
     
-    func scheinRecognizeSwiftOCR() {
-        if let preprocessedImage = self.preprocessedImage {
-            let swiftOCRInstance = SwiftOCR()
-                swiftOCRInstance.recognize(preprocessedImage) { recognizedString in
-//              print("SwiftOCR: \(recognizedString)")
-            }
-
-        }
-    }
     
     
-    func scheinRecognizeTesseract(page: G8PageSegmentationMode) -> String? {
-        if let preprocessedImage = self.preprocessedImage {
-            tesseract.delegate = self
-            tesseract.image = preprocessedImage
-            tesseract.pageSegmentationMode = page
-            tesseract.engineMode = .tesseractOnly
-            tesseract.charBlacklist = "|,-,},{,[,],*,.,:,;,@,',&,!,?,$,%,(,),‘,_,\\,“"
-            tesseract.recognize()
-
-            if let recognizedText = tesseract.recognizedText {
-//                print("Tesseract: \(recognizedText)")
-                return recognizedText
-            }
-        }
-        return nil
-    }
     
 
     
     
     
     
-    func shouldCancelImageRecognitionForTesseract(tesseract: G8Tesseract!) -> Bool {
-        return false // return true if you need to interrupt tesseract before it finishes
-    }
+
     
 }
 
