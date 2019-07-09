@@ -1,0 +1,37 @@
+PODS:
+  - GPUImage (0.1.7)
+  - SwiftLint (0.33.1)
+  - SwiftOCR (1.1):
+    - GPUImage
+  - TesseractOCRiOS (5.0.1)
+  - TOCropViewController (2.5.1)
+  - YesWeScan (2.1.0)
+
+DEPENDENCIES:
+  - GPUImage
+  - SwiftLint
+  - SwiftOCR
+  - TesseractOCRiOS
+  - TOCropViewController
+  - YesWeScan
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - GPUImage
+    - SwiftLint
+    - SwiftOCR
+    - TesseractOCRiOS
+    - TOCropViewController
+    - YesWeScan
+
+SPEC CHECKSUMS:
+  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
+  SwiftLint: 9fc1143bbacec37f94994a7d0d2a85b2154b6294
+  SwiftOCR: e1a5c7582f074b54df2b1ad273983088b3cf5d45
+  TesseractOCRiOS: 2c189465f86abb030d0c5141c90da9705b647854
+  TOCropViewController: 00dc36c4e4a0f4a45efa91adbf22df8a4fae01d3
+  YesWeScan: 339b411e85aed79c210fb2da213cd3ee0b013e3c
+
+PODFILE CHECKSUM: e3e49922b4e118026bc33b5cd2bd6d93267bd724
+
+COCOAPODS: 1.5.3
