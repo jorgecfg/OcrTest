@@ -11,9 +11,15 @@ import Foundation
 class SearchCode {
     var dataService = DataService()
     
-    func locateCode(_ textRecognized:String, brands:[Brand]) -> Model? {
+    func locateCode(_ textRecognized:String) -> Model? {
         let brands = locateBrand(textRecognized)
-        
+        if let models = locateModel(textRecognized, brands: brands) {
+            return models
+        }
+        return Model()
+    }
+    
+    func locateModel(_ textRecognized:String, brands:[Brand]) -> Model? {
         let itens = textRecognized.ocrToArray()
         for brand in brands {
             for code in itens {
